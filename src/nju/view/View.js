@@ -42,7 +42,7 @@ export default class View extends ManageObject {
             }
             view._parent = this;
             this._subviews.push(view);
-            this.$container.append(view.$element);
+            view.placeAt(this.$container);
         }
     }
 
@@ -77,6 +77,11 @@ export default class View extends ManageObject {
         if (this.parent) {
             this.parent.removeSubView(this);
         }
+    }
+
+    placeAt(target) {
+        const $target = (target instanceof jQuery ? target : $(target));
+        $target.append(this.$element);
     }
 
 
