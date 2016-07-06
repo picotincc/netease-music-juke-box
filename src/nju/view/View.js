@@ -35,21 +35,21 @@ export default class View extends ManageObject {
 
 
 
-    addSubView(view) {
+    addSubView(view, $container = this.$container) {
         if (view instanceof View) {
             if (view.parent) {
                 view.removeFromParenet();
             }
             view._parent = this;
             this._subviews.push(view);
-            view.placeAt(this.$container);
+            view.placeAt($container);
         }
     }
 
-    addSubViews(views) {
+    addSubViews(views, $container = this.$container) {
         if (Array.isArray(views)) {
             views.forEach((view) => {
-                this.addSubView(view);
+                this.addSubView(view, $container);
             });
         }
     }
