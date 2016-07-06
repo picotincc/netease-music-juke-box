@@ -1,15 +1,9 @@
-import TrackListView from "./view/TrackListView";
+import Application from "./app/Application";
+
+function main() {
+    const app = new Application("app");
+    app.placeAt(document.body);
+    app.run();
+}
 
 $(main);
-
-function main()
-{
-    const trackListView = new TrackListView();
-    $(document.body).append(trackListView.$element);
-    $.ajax({
-        url: "http://music.163.com/api/playlist/detail?id=94136185"
-    }).then(res => {
-        trackListView.tracks = res.result.tracks;
-        console.log(res.result.tracks);
-    });
-}
