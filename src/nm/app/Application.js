@@ -11,7 +11,10 @@ export default class Application extends NJUApplication {
     _initLayout() {
         this.$element.append(`
             <header></header>
-            <main></main>
+            <main>
+                <aside></aside>
+                <section class="content"></section>
+            </main>
             <footer></footer>
         `);
         this.$element
