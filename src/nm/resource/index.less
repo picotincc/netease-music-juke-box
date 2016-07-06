@@ -1,5 +1,57 @@
-@import "./normalize.less";
+@import "../../nju/resource/index.less";
+@import "variables.less";
 
-html{
-    font-size: "Microsoft Yahei";
+html, body
+{
+    width: 100%;
+    height: 100%;
+}
+
+.nm-app
+{
+    display: flex;
+    flex-direction: column;
+
+    > header
+    {
+        display: flex;
+        align-items: center;
+        color:white;
+        background-color: @nm-app-color;
+        flex:0 0 @nm-app-header-height;
+
+        > h1
+        {
+            margin-left: 20px;
+        }
+    }
+
+    > main
+    {
+        flex:1 1 auto;
+        display: flex;
+        flex-direction: row;
+
+        > aside
+        {
+            background-color: @nm-app-darker-bg;
+            flex:0 0 @nm-app-sidebar-width;
+            border-right: 1px solid @nm-separator-color;
+            overflow-y: auto;
+        }
+
+        > .content
+        {
+            flex:1 1 auto;
+            overflow-y: auto;
+        }
+    }
+
+    > footer
+    {
+        background-color: @nm-app-darker-bg;
+        border-top: 1px solid @nm-separator-color;
+        flex:0 0 @nm-app-footer-height;
+    }
+
 }
