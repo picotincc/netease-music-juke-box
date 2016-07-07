@@ -1,4 +1,4 @@
-const NM_API_URL = "http://music.163.com/api";
+const NM_API_URL = "/api";
 
 export default class ServiceClient {
 
