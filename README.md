@@ -16,6 +16,7 @@
  - Babel
  - Webpack
  - jQuery
+ - Gulp
 
 # 安装步骤
 ## 1. clone项目
@@ -29,3 +30,6 @@
 ## 1. 启动webpack-dev-server
     $ webpack-dev-server
 ## 2. 在浏览器中访问http://localhost:8080
+
+# Glup如何运行
+    $ gulp dev
