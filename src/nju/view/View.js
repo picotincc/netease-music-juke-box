@@ -1,43 +1,54 @@
 import ManageObject from "../base/ManageObject";
 
-export default class View extends ManageObject {
+export default class View extends ManageObject
+{
 
-    init() {
+    init()
+    {
         super.init();
         this._subviews = [];
         this.$element = $(`<${this.getElementTag()}/>`);
-        if (this.id !== null) {
+        if (this.id !== null)
+        {
             this.$element.attr("id", this.id);
         }
         this.$container = this.$element;
     }
 
-    getElementTag() {
+    getElementTag()
+    {
         return "div";
     }
 
-    get subviews() {
+    get subviews()
+    {
         return this._subviews;
     }
 
 
-    addStyleClass(...args) {
+    addStyleClass(...args)
+    {
         this.$element.addClass(...args);
     }
 
-    removeStyleClass(...args) {
+    removeStyleClass(...args)
+    {
         this.$element.removeClass(...args);
     }
 
-    toggleStyleClass(...args) {
+    toggleStyleClass(...args)
+    {
         this.$element.toggleClass(...args);
     }
 
 
 
-    addSubView(view, $container = this.$container) {
-        if (view instanceof View) {
-            if (view.parent) {
+    addSubView(view, $container = this.$container)
+    {
+        if (view instanceof View)
+        {
+            if (view.parent)
+            {
                 view.removeFromParenet();
             }
             view._parent = this;
@@ -46,46 +57,59 @@ export default class View extends ManageObject {
         }
     }
 
-    addSubViews(views, $container = this.$container) {
-        if (Array.isArray(views)) {
+    addSubViews(views, $container = this.$container)
+    {
+        if (Array.isArray(views))
+        {
             views.forEach((view) => {
                 this.addSubView(view, $container);
             });
         }
     }
 
-    removeSubView(view, neverUseAgain = false) {
+    removeSubView(view, neverUseAgain = false)
+    {
         const index = this.subviews.indexOf(view);
-        if (index !== -1) {
+        if (index !== -1)
+        {
             view._parent = null;
             this.subviews.splice(index, 1);
-            if (neverUseAgain) {
+            if (neverUseAgain)
+            {
                 view.$element.remove();
-            } else {
+            }
+            else
+            {
                 view.$element.detach();
             }
         }
     }
 
-    removeAllSubviews(neverUseAgain = false) {
-        while (this.subviews.length > 0) {
+    removeAllSubviews(neverUseAgain = false)
+    {
+        while (this.subviews.length > 0)
+        {
             this.removeSubView(this.subviews[0], neverUseAgain);
         }
     }
 
-    removeFromParenet() {
-        if (this.parent) {
+    removeFromParenet()
+    {
+        if (this.parent)
+        {
             this.parent.removeSubView(this);
         }
     }
 
-    placeAt(target) {
+    placeAt(target)
+    {
         const $target = (target instanceof jQuery ? target : $(target));
         $target.append(this.$element);
     }
 
 
-    $(...args) {
+    $(...args)
+    {
         return this.$element.find(...args);
     }
 }

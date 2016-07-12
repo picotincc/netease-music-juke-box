@@ -2,23 +2,30 @@ import View from "../view/View";
 
 window.$app = null;
 
-export default class Application extends View {
+export default class Application extends View
+{
 
-    constructor(...args) {
+    constructor(...args)
+    {
         super(...args);
-        if(window.$app === null) {
+        if(window.$app === null)
+        {
             window.$app = this;
-        } else {
+        }
+        else
+        {
             throw new Error("Application is a singleton object.It can only be constructed once.")
         }
     }
 
-    init() {
+    init()
+    {
         super.init();
         this.addStyleClass("nju-app");
     }
 
-    run() {
+    run()
+    {
 
     }
 }

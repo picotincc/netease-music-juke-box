@@ -1,19 +1,24 @@
-export default class ManageObject {
-    constructor(id = null) {
+export default class ManageObject
+{
+    constructor(id = null)
+    {
         this._id = id;
         this._parent = null;
         this.init();
     }
 
-    init() {
+    init()
+    {
 
     }
 
-    get id() {
+    get id()
+    {
         return this._id;
     }
 
-    get parent() {
+    get parent()
+    {
         return this._parent;
     }
 }
