@@ -58,7 +58,7 @@ export default class Application extends NJUApplication
             await ServiceClient.getInstance().login();
             this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
 
-            const playlist = await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[0].id);
+            const playlist = await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[10].id);
             this.trackTableView.items = playlist.tracks;
             console.log(playlist.tracks);
         }
