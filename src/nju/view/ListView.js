@@ -6,9 +6,20 @@ export default class ListView extends View
     {
         super.init();
         this._items = null;
+        this._selection = null;
         this._$itemTemplates = [];
         this.addStyleClass("nju-list-view");
+
+        this._initLayout();
+
+        this.$container.on("click", this.getItemElementTag(), this._onclick.bind(this))
     }
+
+    _initLayout()
+    {
+
+    }
+
 
     getElementTag()
     {
@@ -24,16 +35,29 @@ export default class ListView extends View
     {
         return this._items;
     }
-
     set items(value)
     {
         this.clearItems();
         this.addItems(value);
     }
 
+    get selection()
+    {
+        return this._selection;
+    }
+    set selection(value)
+    {
+        this.selectItem(value);
+    }
+
     getTypeOfItem(item)
     {
         return 0;
+    }
+
+    getIdOfItem(item)
+    {
+        return item.id;
     }
 
     clearItems()
@@ -71,9 +95,42 @@ export default class ListView extends View
         this.$container.append($item);
     }
 
+
+    selectItem(item = null)
+    {
+        if (this.selection === item) return;
+
+        if (this.selection !== null)
+        {
+            this.$getItem(this.selection).removeClass("selected");
+            this._selection = null;
+        }
+
+        this._selection = item;
+
+        if (item)
+        {
+            const $item = this.$getItem(item);
+            $item.addClass("selected");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     renderItem(item, $item)
     {
-
+        $item.data("item", item);
+        $item.attr("id", "i-" + this.getIdOfItem(item));
     }
 
     $createItem(itemType = 0)
@@ -89,5 +146,20 @@ export default class ListView extends View
     $createNewItem(itemType = 0)
     {
         return $(`<${this.getItemElementTag()}/>`);
+    }
+
+    $getItem(item)
+    {
+        const id = this.getIdOfItem(item);
+        return this.$container.children("#i-" + id);
+    }
+
+
+
+    _onclick(e)
+    {
+        const $item = $(e.currentTarget);
+        const item = $item.data("item");
+        this.selectItem(item);
     }
 }
