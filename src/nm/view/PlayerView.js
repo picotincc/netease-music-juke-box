@@ -54,11 +54,8 @@ export default class PlayerView extends View
 
     renderTrack(track, $track)
     {
-        console.log($track);
-        console.log(track);
         if (track !== null)
         {
-
             $track.text(track.name);
         }
         else
