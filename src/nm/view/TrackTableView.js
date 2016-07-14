@@ -8,7 +8,9 @@ export default class TrackTableView extends TableView
     {
         super.init();
         this.addStyleClass("nm-track-table-view striped");
-
+        this.$container.on("dblclick", this.getItemElementTag(), () => {
+            this.trigger("itemdblclick");
+        })
     }
 
 
@@ -40,19 +42,6 @@ export default class TrackTableView extends TableView
         $headItem.children(".artists").text("歌手");
         $headItem.children(".album").text("专辑");
         $headItem.children(".time").text("时长");
-    }
-
-    _onclick(e)
-    {
-        const $track = $(e.currentTarget);
-        const track = $track.data("item");
-        console.log(track);
-        this.selectItem(track);
-    }
-
-    selectTrack()
-    {
-
     }
 
 
