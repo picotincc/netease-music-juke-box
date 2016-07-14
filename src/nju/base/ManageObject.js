@@ -48,7 +48,7 @@ export default class ManageObject
     {
         const event = {
             type,
-            parameters
+            parameters,
         };
         this.eventEmitter.trigger(type, [ event ]);
     }
