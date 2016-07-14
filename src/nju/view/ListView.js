@@ -114,6 +114,7 @@ export default class ListView extends View
             $item.addClass("selected");
         }
 
+        this.trigger("selectionchanged");
     }
 
 
