@@ -42,18 +42,5 @@ export default class TrackTableView extends TableView
         $headItem.children(".time").text("时长");
     }
 
-    // _onclick(e)
-    // {
-    //     const $track = $(e.currentTarget);
-    //     const track = $track.data("item");
-    //     console.log(track);
-    //     this.selectItem(track);
-    // }
-    //
-    // selectTrack()
-    // {
-    //
-    // }
-
 
 }
