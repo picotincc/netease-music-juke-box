@@ -4,7 +4,6 @@ import PlayListView from "../view/PlayListView";
 import TrackTableView from "../view/TrackTableView";
 import PlayerView from "../view/PlayerView";
 
-import ServiceClient from "../service/ServiceClient";
 
 export default class Application extends NJUApplication
 {
@@ -49,30 +48,4 @@ export default class Application extends NJUApplication
         this.addSubView(this.playerView, this.$("> footer"));
     }
 
-
-    async run()
-    {
-        console.log("Netease Music Webapp is now running...");
-
-        try {
-            await ServiceClient.getInstance().login();
-            this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
-            this.playListView.selection = this.playListView.items[0];
-            const playlist = await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[10].id);
-            this.trackTableView.items = playlist.tracks;
-            console.log(playlist.tracks);
-        }
-        catch (e)
-        {
-            console.log(e);
-        }
-        // ServiceClient.getInstance().login().then(() => {
-        //     ServiceClient.getInstance().getUserPlayLists().then(playlists => {
-        //         this.playListView.items = playlists;
-        //     });
-        // });
-        // Pseudo login - User ID
-
-        // Refresh
-    }
 }
