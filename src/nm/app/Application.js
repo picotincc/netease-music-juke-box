@@ -21,7 +21,7 @@ export default class Application extends NJUApplication
     _initLayout()
     {
         this.$element.append(`
-            <header><h1>网易云音乐</h1></header>
+            <header><div class="logo"></div><h1>网易云音乐</h1></header>
             <main>
                 <aside class="sidebar"></aside>
                 <section class="content"></section>

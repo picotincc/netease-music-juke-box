@@ -22,9 +22,21 @@ html, body
         background-color: @nm-app-color;
         flex:0 0 @nm-app-header-height;
 
-        > h1
+        //custom--start
+        > .logo
         {
             margin-left: 20px;
+            margin-top: 2px;
+            width: 30px;
+            height: 30px;
+            background: url(./logo.png);
+            background-size:100%;
+        }
+        //custom--end
+
+        > h1
+        {
+            margin-left: 4px;
         }
     }
 

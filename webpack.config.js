@@ -9,7 +9,7 @@ module.exports = {
 
     entry: {
         vendor: [ "jquery" ],
-        nm: ["./nm/index.js", "./nm/resource/index.less" ]
+        nm: ["./nm/index.js", "./nm/resource/index.less", "./nm/format.ico" ]
     },
 
     output: {
@@ -28,6 +28,12 @@ module.exports = {
             {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+            },
+            {
+                test: /\.jpe?g$|\.ico$|\.png$/,
+                loaders: [
+                    'file?name=[path][name].[ext]',
+                ]
             }
         ]
     },
