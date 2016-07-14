@@ -56,7 +56,7 @@ export default class ApplicationController extends NJUApplicationController
         this.playListView = application.playListView;
         this.playListView.on("selectionchanged", this._playListView_selectionchanged.bind(this));
         this.trackTableView = application.trackTableView;
-        this.trackTableView.on("itemdblclick", this._trackTableView_selectionchanged.bind(this));
+        this.trackTableView.on("itemdblclick", this._trackTableView_itemdblclick.bind(this));
         this.playerView = application.playerView;
         return application;
     }
@@ -122,7 +122,7 @@ export default class ApplicationController extends NJUApplicationController
         this.activePlayList = playList;
     }
 
-    _trackTableView_selectionchanged(e)
+    _trackTableView_itemdblclick(e)
     {
         const track = this.trackTableView.selection;
         this.activeTrack = track;
