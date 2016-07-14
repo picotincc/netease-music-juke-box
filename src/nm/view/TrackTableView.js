@@ -8,7 +8,9 @@ export default class TrackTableView extends TableView
     {
         super.init();
         this.addStyleClass("nm-track-table-view striped");
-
+        this.$container.on("dblclick", this.getItemElementTag(), () => {
+            this.trigger("itemdblclick");
+        })
     }
 
 

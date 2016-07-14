@@ -56,7 +56,7 @@ export default class ApplicationController extends NJUApplicationController
         this.playListView = application.playListView;
         this.playListView.on("selectionchanged", this._playListView_selectionchanged.bind(this));
         this.trackTableView = application.trackTableView;
-        this.trackTableView.on("selectionchanged", this._trackTableView_selectionchanged.bind(this));
+        this.trackTableView.on("itemdblclick", this._trackTableView_selectionchanged.bind(this));
         this.playerView = application.playerView;
         return application;
     }
