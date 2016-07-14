@@ -6,6 +6,7 @@ export default class PlayerView extends View
     {
         super.init();
         this._track = null;
+        this.$track = null;
         this.addStyleClass("nm-player-view");
 
         this._initLayout();
@@ -36,7 +37,19 @@ export default class PlayerView extends View
 
     set track(value)
     {
-        this._track = value;
+        this.selectTrack(value);
+    }
+
+    selectTrack(track)
+    {
+        if(this.track === track) return;
+
+        this._track = track;
+
+        if (track)
+        {
+            this.renderTrack(track, this.$track);
+        }
     }
 
     renderTrack(track, $track)
@@ -45,6 +58,7 @@ export default class PlayerView extends View
         console.log(track);
         if (track !== null)
         {
+
             $track.text(track.name);
         }
         else
@@ -52,4 +66,5 @@ export default class PlayerView extends View
             $track.text("none track");
         }
     }
+
 }
