@@ -9,7 +9,8 @@ export default class ApplicationController extends NJUApplicationController
     {
         super.init();
         this._playLists = [];
-        this._selectedPlayList = null;
+        this._activePlayList = null;
+        this._activeTrack = null;
     }
 
     get playLists()
@@ -22,16 +23,30 @@ export default class ApplicationController extends NJUApplicationController
         this._onPlayListsChanged();
     }
 
-    get selectedPlayList()
+    get activePlayList()
     {
-        return this._selectedPlayList;
+        return this._activePlayList;
     }
-    set selectedPlayList(value)
+    set activePlayList(value)
     {
-        if (this.selectedPlayList !== value)
+        if (this.activePlayList !== value)
         {
-            this._selectedPlayList = value;
-            this._onSelectedPlayListChanged();
+            this._activePlayList = value;
+            this._onActivePlayListChanged();
+        }
+    }
+
+    get activeTrack()
+    {
+        return this._activeTrack;
+    }
+
+    set activeTrack(value)
+    {
+        if (this._activeTrack !== value)
+        {
+            this._activeTrack = value;
+            this._onActiveTrackChanged();
         }
     }
 
@@ -75,11 +90,11 @@ export default class ApplicationController extends NJUApplicationController
         this.playListView.items = this.playLists;
     }
 
-    _onSelectedPlayListChanged()
+    _onActivePlayListChanged()
     {
-        if (this.selectedPlayList !== null)
+        if (this.activePlayList !== null)
         {
-            this.trackTableView.items = this.selectedPlayList.tracks;
+            this.trackTableView.items = this.activePlayList.tracks;
         }
         else
         {
@@ -87,9 +102,14 @@ export default class ApplicationController extends NJUApplicationController
         }
     }
 
+    _onActiveTrackChanged()
+    {
+        
+    }
+
     async _playListView_selectionchanged(e)
     {
         const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.selectedId);
-        this.selectedPlayList = playList;
+        this.activePlayList = playList;
     }
 }

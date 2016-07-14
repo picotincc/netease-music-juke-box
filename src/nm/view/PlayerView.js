@@ -13,13 +13,20 @@ export default class PlayerView extends View
 
     _initLayout()
     {
-
+        this.$track = $(`<${this.getTrackElementTag()}/>`);
+        this.renderTrack(this.track, this.$track);
+        this.$container.append(this.$track);
     }
 
 
     getElementTag()
     {
         return "span";
+    }
+
+    getTrackElementTag()
+    {
+        return "div";
     }
 
     get track()
@@ -32,8 +39,17 @@ export default class PlayerView extends View
         this._track = value;
     }
 
-    renderTrack(track)
+    renderTrack(track, $track)
     {
-
+        console.log($track);
+        console.log(track);
+        if (track !== null)
+        {
+            $track.text(track.name);
+        }
+        else
+        {
+            $track.text("none track");
+        }
     }
 }
