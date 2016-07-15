@@ -56,7 +56,10 @@ module.exports = {
             "/api/*": {
                 target: "http://music.163.com/",
                 host: "music.163.com",
-                secure: false
+                secure: false,
+                headers: {
+                    "Referer": "http://music.163.com"
+                }
             }
         }
     }
