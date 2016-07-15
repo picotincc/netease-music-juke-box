@@ -55,26 +55,26 @@ export default class ListView extends View
         return this.getIdOfItem(this.selection);
     }
 
-    set selectedId(value = null)
-    {
-        if (value === null)
-        {
-            this.selection = null;
-        }
-        else
-        {
-            const $item = this.$getItem(value);
-            if ($item.length > 0)
-            {
-                const item = $item.data("item");
-                if (item)
-                {
-                    this.selection = item;
-                }
-            }
-        }
-
-    }
+    // set selectedId(value = null)
+    // {
+    //     if (value === null)
+    //     {
+    //         this.selection = null;
+    //     }
+    //     else
+    //     {
+    //         const $item = this.$getItem(value);
+    //         if ($item.length > 0)
+    //         {
+    //             const item = $item.data("item");
+    //             if (item)
+    //             {
+    //                 this.selection = item;
+    //             }
+    //         }
+    //     }
+    //
+    // }
 
     getTypeOfItem(item)
     {
@@ -147,9 +147,10 @@ export default class ListView extends View
         {
             const $item = this.$getItem(item);
             $item.addClass("selected");
+            this.trigger("selectionchanged");
         }
 
-        this.trigger("selectionchanged");
+        // this.trigger("selectionchanged");
     }
 
 
