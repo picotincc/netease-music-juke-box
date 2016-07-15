@@ -53,11 +53,17 @@ export default class ApplicationController extends NJUApplicationController
     createApplication()
     {
         const application = new Application();
+        this.playerView = application.playerView;
+
         this.playListView = application.playListView;
         this.playListView.on("selectionchanged", this._playListView_selectionchanged.bind(this));
+
+        this.searchView = application.searchView;
+        this.searchView.on("search", this._searchView_search.bind(this));
+
         this.trackTableView = application.trackTableView;
         this.trackTableView.on("itemdblclick", this._trackTableView_itemdblclick.bind(this));
-        this.playerView = application.playerView;
+
         return application;
     }
 
@@ -126,5 +132,10 @@ export default class ApplicationController extends NJUApplicationController
     {
         const track = this.trackTableView.selection;
         this.activeTrack = track;
+    }
+
+    _searchView_search(e)
+    {
+        console.log(this.searchView.text);
     }
 }
