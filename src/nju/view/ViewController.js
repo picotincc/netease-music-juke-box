@@ -7,17 +7,23 @@ export default class ViewController extends ManageObject
     {
         super(id);
         this._view = this.createView(options);
-        this.applyViewOptions(options);
-    }
+        this.initView(options);
 
-    createView(options)
-    {
-        return new View(options);
     }
 
     get view()
     {
         return this._view;
+    }
+
+    createView(options)
+    {
+        return new View();
+    }
+
+    initView(options)
+    {
+        this.applyViewOptions(options);
     }
 
     applyViewOptions(options = {})
