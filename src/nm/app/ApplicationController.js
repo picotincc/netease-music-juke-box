@@ -100,7 +100,7 @@ export default class ApplicationController extends NJUApplicationController
 
     _onActivePlayListChanged()
     {
-        if (this.activePlayList !== null)
+        if (this.activePlayList)
         {
             this.trackTableView.items = this.activePlayList.tracks;
         }
@@ -124,8 +124,15 @@ export default class ApplicationController extends NJUApplicationController
 
     async _playListView_selectionchanged(e)
     {
-        const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.selectedId);
-        this.activePlayList = playList;
+        if (this.playListView.selectedId)
+        {
+            const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.selectedId);
+            this.activePlayList = playList;
+        }
+        else
+        {
+            this.activePlayList = null;
+        }
     }
 
     _trackTableView_itemdblclick(e)
@@ -134,8 +141,13 @@ export default class ApplicationController extends NJUApplicationController
         this.activeTrack = track;
     }
 
-    _searchView_search(e)
+    async _searchView_search(e)
     {
         console.log(this.searchView.text);
+
+        this.activePlayList = {
+            id: "search",
+            tracks: await ServiceClient.getInstance().search(this.searchView.text)
+        }
     }
 }

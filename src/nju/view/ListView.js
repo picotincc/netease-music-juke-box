@@ -55,6 +55,27 @@ export default class ListView extends View
         return this.getIdOfItem(this.selection);
     }
 
+    set selectedId(value = null)
+    {
+        if (value === null)
+        {
+            this.selection = null;
+        }
+        else
+        {
+            const $item = this.$getItem(value);
+            if ($item.length > 0)
+            {
+                const item = $item.data("item");
+                if (item)
+                {
+                    this.selection = item;
+                }
+            }
+        }
+
+    }
+
     getTypeOfItem(item)
     {
         return 0;
