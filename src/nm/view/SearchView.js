@@ -9,6 +9,7 @@ export default class SearchView extends View
         this.addStyleClass("nm-search-view");
 
         this._text = null;
+        this.__suggestionList = null;
         this.$element.append(`<span class="icon iconfont icon-search"/>`);
         this.$input = $(`<input type=search placeholder="搜索音乐">`);
         this.$element.append(this.$input);
@@ -30,6 +31,12 @@ export default class SearchView extends View
                 this.trigger("input");
             }, 300);
         });
+        this.$input.on("focus", () => {
+            this.trigger("focus");
+        });
+        this.$input.on("blur", () => {
+            this.trigger("blur");
+        });
     }
 
     get text()
@@ -42,14 +49,18 @@ export default class SearchView extends View
         this.$input.val(typeof(value) === "string" ? value.trim() : "");
     }
 
-    get suggestList()
+    get suggestionList()
     {
-        return this._suggestList;
+        return this._suggestionList;
     }
 
-    set suggestList(value)
+    set suggestionList(value)
     {
-        this.suggestView.items = value;
+        if (value)
+        {
+            this.suggestionView.items = value;
+        }
+        this._suggestionList = value;
     }
 
     _initSuggestionView()
@@ -57,7 +68,9 @@ export default class SearchView extends View
         this.suggestionView = new ListView("suggest-view");
         this.suggestionView.addStyleClass("nm-suggest-view");
         this.addSubView(this.suggestionView);
-
+        this.hideSuggestion();
+        this.suggestionView.renderItem = this._suggestionView_renderItem.bind(this.suggestionView);
+        this.suggestionView.$container.on("mousedown", this.suggestionView.getItemElementTag(), this._suggestionView_onitemclick.bind(this.suggestionView));
     }
 
     search(text = this.text)
@@ -66,6 +79,28 @@ export default class SearchView extends View
         if (this.text !== "")
         {
             this.trigger("search");
+        }
+    }
+
+    showSuggestion()
+    {
+        this.suggestionView.$element.show();
+    }
+
+    hideSuggestion()
+    {
+        this.suggestionView.$element.hide();
+    }
+
+    toggleSuggestion(shown)
+    {
+        if (shown)
+        {
+            this.showSuggestion();
+        }
+        else
+        {
+            this.hideSuggestion();
         }
     }
 
@@ -80,6 +115,19 @@ export default class SearchView extends View
     _icon_onclick(e)
     {
         this.search();
+    }
+
+    _suggestionView_renderItem(item, $item)
+    {
+        $item.data("item", item);
+        $item.text(item.name);
+    }
+
+    _suggestionView_onitemclick(e)
+    {
+        const $item = $(e.currentTarget);
+        const item = $item.data("item");
+        this.trigger("itemclick", { item });
     }
 
 }
