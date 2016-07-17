@@ -13,11 +13,23 @@ export default class SearchView extends View
         this.$input = $(`<input type=search placeholder="搜索音乐">`);
         this.$element.append(this.$input);
 
-        this._initSuggestionView();
-
         this.$element.on("keydown", this._onkeydown.bind(this));
         this.$element.on("click", "span.icon", this._icon_onclick.bind(this));
 
+        this._initSuggestionView();
+
+        let inputDelay = null;
+
+        this.$input.on("input", () => {
+            if (inputDelay !== null)
+            {
+                window.clearTimeout(inputDelay);
+                inputDelay = null;
+            }
+            inputDelay = window.setTimeout(() => {
+                this.trigger("input");
+            }, 300);
+        });
     }
 
     get text()
@@ -45,6 +57,7 @@ export default class SearchView extends View
         this.suggestionView = new ListView("suggest-view");
         this.suggestionView.addStyleClass("nm-suggest-view");
         this.addSubView(this.suggestionView);
+
     }
 
     search(text = this.text)
@@ -69,8 +82,4 @@ export default class SearchView extends View
         this.search();
     }
 
-    _suggest_oninput(e)
-    {
-        console.log("_suggest_oninput");
-    }
 }

@@ -12,7 +12,12 @@ export default class SearchViewController extends ViewController
     initView(options)
     {
         super.initView(options);
-
+        this.view.on("input",this._oninput.bind(this));
         this.suggestionListView = this.view.suggestionListView;
+    }
+
+    async _oninput(e)
+    {
+        console.log(this.view.text);
     }
 }
