@@ -7,6 +7,9 @@
  http://music.163.com/api/user/playlist/?uid=40652589&limit=1000&offset=0
  - 获取某个歌单的详细信息  
  http://music.163.com/api/playlist/detail?id=4000000
+ - 搜索功能
+ http://music.163.com/api/search/get/ & http://music.163.com/api/suggest/web 
+
 
 # 技术概述
  - HTML5
