@@ -53,18 +53,22 @@ export default class ApplicationController extends NJUApplicationController
     createApplication()
     {
         const application = new Application();
-        this.playerView = application.playerView;
+        return application;
+    }
 
-        this.playListView = application.playListView;
+    initView(options)
+    {
+        super.initView(options)
+        this.playerView = this.application.playerView;
+
+        this.playListView = this.application.playListView;
         this.playListView.on("selectionchanged", this._playListView_selectionchanged.bind(this));
 
-        this.searchView = application.searchView;
+        this.searchView = this.application.searchView;
         this.searchView.on("search", this._searchView_search.bind(this));
 
-        this.trackTableView = application.trackTableView;
+        this.trackTableView = this.application.trackTableView;
         this.trackTableView.on("itemdblclick", this._trackTableView_itemdblclick.bind(this));
-
-        return application;
     }
 
     async run()
@@ -147,8 +151,6 @@ export default class ApplicationController extends NJUApplicationController
 
     async _searchView_search(e)
     {
-        console.log(this.searchView.text);
-
         this.activePlayList = {
             id: "search",
             tracks: await ServiceClient.getInstance().search(this.searchView.text)
