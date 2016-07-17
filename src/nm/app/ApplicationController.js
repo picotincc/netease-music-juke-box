@@ -53,12 +53,22 @@ export default class ApplicationController extends NJUApplicationController
     createApplication()
     {
         const application = new Application();
-        this.playListView = application.playListView;
-        this.playListView.on("selectionchanged", this._playListView_selectionchanged.bind(this));
-        this.trackTableView = application.trackTableView;
-        this.trackTableView.on("itemdblclick", this._trackTableView_itemdblclick.bind(this));
-        this.playerView = application.playerView;
         return application;
+    }
+
+    initView(options)
+    {
+        super.initView(options)
+        this.playerView = this.application.playerView;
+
+        this.playListView = this.application.playListView;
+        this.playListView.on("selectionchanged", this._playListView_selectionchanged.bind(this));
+
+        this.searchView = this.application.searchView;
+        this.searchView.on("search", this._searchView_search.bind(this));
+
+        this.trackTableView = this.application.trackTableView;
+        this.trackTableView.on("itemdblclick", this._trackTableView_itemdblclick.bind(this));
     }
 
     async run()
@@ -94,8 +104,12 @@ export default class ApplicationController extends NJUApplicationController
 
     _onActivePlayListChanged()
     {
-        if (this.activePlayList !== null)
+        if (this.activePlayList)
         {
+            if (this.activePlayList.id === "search")
+            {
+                this.playListView.selectItem(null);
+            }
             this.trackTableView.items = this.activePlayList.tracks;
         }
         else
@@ -118,13 +132,28 @@ export default class ApplicationController extends NJUApplicationController
 
     async _playListView_selectionchanged(e)
     {
-        const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.selectedId);
-        this.activePlayList = playList;
+        if (this.playListView.selectedId)
+        {
+            const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.selectedId);
+            this.activePlayList = playList;
+        }
+        else
+        {
+            this.activePlayList.selection = null;
+        }
     }
 
     _trackTableView_itemdblclick(e)
     {
         const track = this.trackTableView.selection;
         this.activeTrack = track;
+    }
+
+    async _searchView_search(e)
+    {
+        this.activePlayList = {
+            id: "search",
+            tracks: await ServiceClient.getInstance().search(this.searchView.text)
+        }
     }
 }

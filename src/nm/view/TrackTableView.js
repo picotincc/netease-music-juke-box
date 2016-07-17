@@ -32,7 +32,16 @@ export default class TrackTableView extends TableView
         $item.children(".name").text(item.name);
         $item.children(".artists").text(item.artists.map(artist => artist.name).join("， "));
         $item.children(".album").text(item.album.name);
-        $item.children(".time").text(TimeUtil.formatPlayTime(item.lMusic.playTime));
+        let duration = 0;
+        if (item.lMusic)
+        {
+            duration = item.lMusic.playTime;
+        }
+        else
+        {
+            duration = item.duration;
+        }
+        $item.children(".time").text(TimeUtil.formatPlayTime(duration));
     }
 
     renderHeadItem($headItem)

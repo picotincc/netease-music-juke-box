@@ -8,11 +8,23 @@ export default class PlayListView extends ListView
         this.addStyleClass("nm-play-list-view");
     }
 
+    // set selectedId(value)
+    // {
+    //     if (value ! == "search")
+    //     {
+    //
+    //     }
+    //     else
+    //     {
+    //
+    //     }
+    // }
+
     $createNewItem()
     {
         const $li = super.$createNewItem();
         $li.append(`
-            <span class="icon"></span>
+            <span class="icon iconfont icon-playlist"></span>
             <span class="text"></span>
         `);
         return $li;
