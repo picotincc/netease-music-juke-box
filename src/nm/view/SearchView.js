@@ -78,6 +78,7 @@ export default class SearchView extends View
         this.text = text;
         if (this.text !== "")
         {
+            console.log(this.text);
             this.trigger("search");
         }
     }

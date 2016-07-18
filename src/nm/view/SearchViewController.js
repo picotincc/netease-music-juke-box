@@ -25,7 +25,7 @@ export default class SearchViewController extends ViewController
     {
         const keyword = this.view.text;
         try {
-            if (keyword)
+            if (keyword && keyword.trim() !== "")
             {
                 const result = await ServiceClient.getInstance().search(keyword, true);
                 this.view.suggestionList = result;

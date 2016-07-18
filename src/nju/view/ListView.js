@@ -37,8 +37,21 @@ export default class ListView extends View
     }
     set items(value)
     {
+        const itemsLength = this.items !== null ? this.items.length : 0;
         this.clearItems();
-        this.addItems(value);
+        // this.addItems(value);
+
+        if (value.length >= itemsLength)
+        {
+            const resetArr = value.splice(0, itemsLength);
+            this.resetItems(resetArr);
+            this.addItems(value);
+        }
+        else
+        {
+            this.removeItems(itemsLength - value.length);
+            this.resetItems(value);
+        }
     }
 
     get selection()
@@ -94,6 +107,28 @@ export default class ListView extends View
 
     }
 
+
+
+
+    removeItems(count)
+    {
+        const itemsDom = this.$container.children(this.getItemElementTag());
+        while (count > 0)
+        {
+            $(itemsDom[count]).remove();
+            count--;
+        }
+    }
+
+    resetItems(items)
+    {
+        const itemsDom = this.$container.children(this.getItemElementTag());
+        items.forEach((item, index) =>{
+            this.items.push(item);
+            this.renderItem(item, $(itemsDom[index]));
+        });
+    }
+
     clearItems()
     {
         this.selection = null;
@@ -102,7 +137,7 @@ export default class ListView extends View
             if(this._items.length > 0)
             {
                 this._items.splice(0, this._items.length);
-                this.$container.children(this.getItemElementTag()).remove();
+                //this.$container.children(this.getItemElementTag()).remove();
             }
         }
         else
