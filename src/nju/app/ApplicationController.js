@@ -39,7 +39,7 @@ export default class ApplicationController extends ViewController
 
     createApplication(options = {})
     {
-        return new Application();
+        throw new Error("createApplication(options) must be overrided in the derived class.");
     }
 
     run()
