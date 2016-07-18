@@ -147,9 +147,12 @@ export default class ApplicationController extends NJUApplicationController
 
     async _searchView_search(e)
     {
-        this.activePlayList = {
-            id: "search",
-            tracks: await ServiceClient.getInstance().search(this.searchView.text)
+        if (this.searchView.text.trim() !== "")
+        {
+            this.activePlayList = {
+                id: "search",
+                tracks: await ServiceClient.getInstance().search(this.searchView.text)
+            }
         }
     }
 }
