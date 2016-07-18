@@ -38,7 +38,7 @@ export default class SearchViewController extends ViewController
 
     _onfocus(e)
     {
-        this.view.toggleSuggestion(this.view.suggestionList && this.view.suggestionList.length > 0);
+        this.view.toggleSuggestion(this.view.text && this.view.suggestionList && this.view.suggestionList.length > 0);
     }
 
     _onblur(e)
