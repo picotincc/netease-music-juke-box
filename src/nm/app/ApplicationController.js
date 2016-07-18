@@ -147,7 +147,7 @@ export default class ApplicationController extends NJUApplicationController
 
     async _searchView_search(e)
     {
-        if (this.searchView.text)
+        if (this.searchView.text.trim() !== "")
         {
             this.activePlayList = {
                 id: "search",
