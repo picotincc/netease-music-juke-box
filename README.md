@@ -27,7 +27,7 @@
 ## 2. 进入项目根目录
     $ cd netease-music-juke-box
 ## 3. 安装package.json中的devDependencies
-    $ npm install --only
+    $ npm install -dev
 
 # 运行步骤
 ## 1. 启动webpack-dev-server
