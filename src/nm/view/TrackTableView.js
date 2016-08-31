@@ -53,5 +53,4 @@ export default class TrackTableView extends TableView
         $headItem.children(".time").text("时长");
     }
 
-
 }
