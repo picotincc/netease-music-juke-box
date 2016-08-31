@@ -36,3 +36,21 @@
 
 # Glup如何运行
     $ gulp dev
+
+
+# PS
+如果安装了1.15.0+版本以上的webpack-dev-server,请更改webpack.config.js中的proxy：
+~~~JavaScript
+    proxy: {
+            "/api/*": {
+                "target": {
+                  "host": "music.163.com",
+                  "protocol": 'http:',
+                  "port": 80
+                },
+                ignorePath: false,
+                changeOrigin: true,
+                secure: false,
+            }
+    }
+~~~
