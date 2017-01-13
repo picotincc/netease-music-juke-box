@@ -23,7 +23,7 @@
 
 # 安装步骤
 ## 1. clone项目
-    $ git clone https://github.com/MagicCube/netease-music-juke-box.git
+    $ git clone https://github.com/maybeShuo/netease-music-juke-box.git
 ## 2. 进入项目根目录
     $ cd netease-music-juke-box
 ## 3. 安装package.json中的devDependencies
